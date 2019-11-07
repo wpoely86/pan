@@ -21,9 +21,9 @@ from __future__ import print_function
 import re
 import argparse
 from glob import glob
-from colorama import Fore, Style, init as colorama_init
 from sys import stdout, exit as sys_exit
 from inspect import getmembers, ismethod
+from colorama import Fore, Style, init as colorama_init
 from prettytable import PrettyTable
 
 RS_COMMENT = r'(?:#|@{.*?})'
@@ -52,7 +52,8 @@ LINE_PATTERNS = {
     "Trailing whitespace": re.compile(r'(?P<error>\s+$)'),
     "Use dicts instead of nlists": re.compile(r'\b(?P<error>(?:is_)?nlist)\s*\('),
     "Include statements no longer need curly braces": re.compile(r'''include\s+(?P<error>{[^;]+})'''),
-    "Line is longer than %s characters" % LINE_LENGTH_LIMIT: re.compile(r'''^.{0,%s}(?P<error>.*?)$''' % LINE_LENGTH_LIMIT),
+    "Line is longer than %s characters" % LINE_LENGTH_LIMIT:
+    re.compile(r'''^.{0,%s}(?P<error>.*?)$''' % LINE_LENGTH_LIMIT),
     "Commas should be followed by exactly one space": re.compile(r'(?P<error>,(?:\S|\s{2,}))'),
     "Whitespace before semicolon": re.compile(r'(?P<error>\s+;)'),
     "Semicolons should be followed exactly one space or end-of-line": re.compile(r';(?P<error>(?:\S|\s{2,}))'),
@@ -310,7 +311,10 @@ def strip_trailing_comments(line, string_ranges):
 
 
 def check_line_component_use(line, components_included):
-    """Check a line for usage of a component, flag a problem if any component is not in the list of included components."""
+    """
+    Check a line for usage of a component, flag a problem if any component
+    is not in the list of included components.
+    """
     diagnoses = []
     messages = []
     problem_count = 0
@@ -460,7 +464,8 @@ def lint_file(filename, allow_mvn_templates=False):
         line = line.rstrip('\n')
 
         if line and line_number not in ignore_lines and not RE_COMMENT_LINE.match(line):
-            diagnoses, messages, line_problem_count, first_line = lint_line(line, line_number, components_included, first_line, allow_mvn_templates)
+            diagnoses, messages, line_problem_count, first_line = lint_line(line, line_number, components_included,
+                                                                            first_line, allow_mvn_templates)
             file_problem_count += line_problem_count
 
             if messages and diagnoses:
@@ -478,7 +483,8 @@ def main():
     parser.add_argument('--vi', action='store_true', help='Output line numbers in a vi option style')
     parser.add_argument('--table', action='store_true', help='Display a table of per-file problem stats')
     parser.add_argument('--allow_mvn_templates', action='store_true', help='Allow use of maven templates')
-    parser.add_argument('--always_exit_success', action='store_true', help='Always exit cleanly even if problems are found')
+    parser.add_argument('--always_exit_success', action='store_true',
+                        help='Always exit cleanly even if problems are found')
     group_output = parser.add_mutually_exclusive_group()
     group_output.add_argument('--debug', action='store_true', help='Enable debug output')
     group_output.add_argument('--ide', action='store_true', help='Output machine-readable results for use by IDEs')
@@ -521,6 +527,8 @@ def main():
 
     if problems_found:
         return 1
+
+    return 0
 
 
 if __name__ == '__main__':
