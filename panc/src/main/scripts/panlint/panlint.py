@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # coding=utf8
 #
 # Copyright 2016 Science & Technology Facilities Council
@@ -101,15 +101,9 @@ class LineChecks:
             valid = True
             if op == '-' and (
                     (
-                        re.search(r'[^\w\s)=]\s*$', chars_before)
-                        and
-                        re.search(r'^\s*\d+\s*[^\w\s]', chars_after)
-                    )
-                    or
-                    (
-                        re.search(r'=\s*$', chars_before)
-                        and
-                        re.search(r'^\s*\d+', chars_after)
+                        re.search(r'[^\w\s)=]\s*$', chars_before) and re.search(r'^\s*\d+\s*[^\w\s]', chars_after)
+                    ) or (
+                        re.search(r'=\s*$', chars_before) and re.search(r'^\s*\d+', chars_after)
                     )
             ):
                 # -\d not preceded or followed by eg variable name
@@ -147,7 +141,7 @@ class LineChecks:
 
             if not valid:
                 debug_range(start, end, 'WS Operator', True)
-                diagnosis = diagnosis[:start] + ('^' * (end-start)) + diagnosis[end:]
+                diagnosis = diagnosis[:start] + ('^' * (end - start)) + diagnosis[end:]
 
             passed &= valid
 
@@ -308,7 +302,7 @@ def strip_trailing_comments(line, string_ranges):
     for comment in RE_COMMENT.finditer(line):
         # Does the candidate comment start inside a string?
         # If so, it's not really a comment.
-        if not inside_string(comment.start(), comment.start()+1, string_ranges):
+        if not inside_string(comment.start(), comment.start() + 1, string_ranges):
             debug_range(comment.start(), comment.end(), 'Comment', False)
             line = line[:comment.start()].rstrip()
     return line
@@ -364,7 +358,7 @@ def check_line_paths(line):
     path_match = RE_PATH.match(line)
     if path_match:
         path_start, path_end = path_match.span('path')
-        path_string = line[path_start+1:path_end-1]
+        path_string = line[path_start + 1:path_end - 1]
         debug_range(path_start, path_end, 'Path String', False)
         for message, pattern in PATH_PATTERNS.iteritems():
             matches = pattern.finditer(path_string)
