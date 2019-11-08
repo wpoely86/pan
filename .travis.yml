@@ -11,6 +11,7 @@ install:
     - which -a python
     - which python3
     - which -a pip
+    - ls -alh /opt/pyenv/shims
     - pip install -U --user prettytable colorama coverage coveralls Sphinx
 
 script:
