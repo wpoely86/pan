@@ -8,7 +8,7 @@ cache:
   - $HOME/.m2
 
 install:
-    - pip install prettytable colorama coverage coveralls
+    - pip install --user prettytable colorama coverage coveralls
 
 script:
     - mvn clean install
