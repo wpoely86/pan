@@ -15,7 +15,7 @@ matrix:
               - 2.7
               - 3.6
           install:
-              - pip install -U --user prettytable colorama coverage coveralls
+              - pip install -U prettytable colorama coverage coveralls
           script:
               - python panc/src/main/scripts/panlint/tests.py
               - coverage run --source=panc/src/main/scripts/panlint --omit panc/src/main/scripts/panlint/tests.py panc/src/main/scripts/panlint/tests.py
