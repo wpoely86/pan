@@ -12,7 +12,7 @@ install:
 
 script:
     - mvn clean install
-    - python panc/src/main/scripts/panlint/tests.py
+    - python3 panc/src/main/scripts/panlint/tests.py
     - coverage run --source=panc/src/main/scripts/panlint --omit panc/src/main/scripts/panlint/tests.py panc/src/main/scripts/panlint/tests.py
 
 after_success: coveralls
