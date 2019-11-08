@@ -1,22 +1,17 @@
 language: java
 jdk:
     - openjdk8
-    - openjdk11
 
 cache:
   directories:
   - $HOME/.m2
 
 install:
-    - which -a python
-    - which python3
-    - which -a pip
-    - ls -alh /opt/pyenv/shims
-    - pip install -U --user prettytable colorama coverage coveralls Sphinx
+    - pip3.6 install -U --user prettytable colorama coverage coveralls Sphinx
 
 script:
     - mvn clean install
-    - python panc/src/main/scripts/panlint/tests.py
+    - python3.6 panc/src/main/scripts/panlint/tests.py
     - coverage run --source=panc/src/main/scripts/panlint --omit panc/src/main/scripts/panlint/tests.py panc/src/main/scripts/panlint/tests.py
 
 after_success: coveralls
