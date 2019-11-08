@@ -13,19 +13,12 @@ matrix:
         - language: python
           python:
               - 2.7
-          install:
-              - pip install -U prettytable colorama coverage coveralls
-          script:
-              - python panc/src/main/scripts/panlint/tests.py
-              - coverage run --source=panc/src/main/scripts/panlint --omit panc/src/main/scripts/panlint/tests.py panc/src/main/scripts/panlint/tests.py
-        - language: python
-          python:
               - 3.6
           install:
-              - pip install -U prettytable colorama coverage coveralls
-              - pip --version
-              - python --version
+              - python2 -m pip install -U prettytable colorama coverage coveralls
+              - python3 -m pip install -U prettytable colorama coverage coveralls
           script:
-              - python panc/src/main/scripts/panlint/tests.py
+              - python2 panc/src/main/scripts/panlint/tests.py
+              - python3 panc/src/main/scripts/panlint/tests.py
               - coverage run --source=panc/src/main/scripts/panlint --omit panc/src/main/scripts/panlint/tests.py panc/src/main/scripts/panlint/tests.py
           after_success: coveralls
