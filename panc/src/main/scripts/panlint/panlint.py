@@ -515,9 +515,9 @@ def main():
         print('No files were provided, not doing anything')
         return 0
 
-    whitelist_components = None
-    if args.whitelist_components:
-        whitelist_components = args.whitelist_components.split(',')
+    ignore_components = None
+    if args.ignore_components:
+        ignore_components = args.ignore_components.split(',')
 
     for path in args.paths:
         for filename in glob(path):
