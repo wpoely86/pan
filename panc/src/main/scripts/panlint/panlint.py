@@ -459,8 +459,8 @@ def lint_file(filename, allow_mvn_templates=False, ignore_components=None):
 
     # Get list of all component configs included in template
     components_included = RE_COMPONENT_INCLUDE.findall(raw_text)
-    # add whitelisted components
-    components_included.extend(whitelist_components)
+    # add ignored components
+    components_included.extend(ignore_components)
 
     # Is the current file part of the source tree of a component?
     # If so, regard the component config as being included
