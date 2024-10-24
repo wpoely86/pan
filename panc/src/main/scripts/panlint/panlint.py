@@ -435,7 +435,7 @@ def lint_line(line, components_included, first_line=False, allow_mvn_templates=F
     return (line, first_line)
 
 
-def lint_file(filename, allow_mvn_templates=False, whitelist_components=None):
+def lint_file(filename, allow_mvn_templates=False, ignore_components=None):
     """Run lint checks against all lines of a file."""
     if whitelist_components is None:
         whitelist_components = []
