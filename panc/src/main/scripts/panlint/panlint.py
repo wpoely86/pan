@@ -495,7 +495,7 @@ def main():
     parser.add_argument('--allow_mvn_templates', action='store_true', help='Allow use of maven templates')
     parser.add_argument('--always_exit_success', action='store_true',
                         help='Always exit cleanly even if problems are found')
-    parser.add_argument('--whitelist-components', type=str,
+    parser.add_argument('--ignore-components', type=str,
                         help='List of component to ignore when checking included components')
     group_output = parser.add_mutually_exclusive_group()
     group_output.add_argument('--debug', action='store_true', help='Enable debug output')
