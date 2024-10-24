@@ -521,10 +521,10 @@ def main():
 
     for path in args.paths:
         for filename in glob(path):
-            file_problem_lines, file_problem_count = lint_file(filename, args.allow_mvn_templates, whitelist_components)
-            problem_lines += file_problem_lines
-            problem_count += file_problem_count
-            problem_stats[filename] = file_problem_count
+            file_reports, file_problems = lint_file(filename, args.allow_mvn_templates, ignore_components)
+            reports += file_reports
+            problems_found += file_problems
+            problem_stats[filename] = file_problems
 
     for line in problem_lines:
         print_report(line, vi=args.vi)
